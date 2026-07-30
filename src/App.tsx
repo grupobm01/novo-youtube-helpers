@@ -6,7 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { checkIfBlockedCountry } from "@/lib/blockRegion";
-import Login from "@/pages/Login";
+
 import Inicio from "@/pages/Inicio";
 import Terms from "@/pages/Terms";
 import Saques from "@/pages/Saques";
@@ -67,7 +67,7 @@ const App = () => {
             <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
             <Route path="/admin/postback-logs" element={<ProtectedRoute><AdminPostbackLogs /></ProtectedRoute>} />
             <Route path="/terms" element={<Terms />} />
-            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="/" element={<Navigate to="/inicio" replace />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
