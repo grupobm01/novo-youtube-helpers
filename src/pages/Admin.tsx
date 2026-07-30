@@ -15,7 +15,7 @@ export default function Admin() {
     (async () => {
       const user = await getAuthUser();
       if (!user) {
-        navigate("/login", { replace: true });
+        navigate("/inicio", { replace: true });
         return;
       }
       const ok = await isAdmin(user.id);
