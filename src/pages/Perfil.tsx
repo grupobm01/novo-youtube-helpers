@@ -21,7 +21,7 @@ export default function Perfil() {
 
   const handleLogout = async () => {
     await signOut();
-    navigate("/login", { replace: true });
+    navigate("/inicio", { replace: true });
   };
 
   return (
