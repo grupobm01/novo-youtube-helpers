@@ -42,7 +42,11 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
   }
 
   if (!authenticated) {
-    return <Navigate to="/login" replace />;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background px-6 text-center">
+        <p className="text-sm text-muted-foreground">Não foi possível iniciar a sessão. Recarregue a página.</p>
+      </div>
+    );
   }
 
   return <>{children}</>;
