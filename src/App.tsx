@@ -55,7 +55,7 @@ const App = () => {
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Navigate to="/inicio" replace />} />
             <Route path="/inicio" element={<ProtectedRoute><TikTok /></ProtectedRoute>} />
             <Route path="/saques" element={<ProtectedRoute><Saques /></ProtectedRoute>} />
             <Route path="/perfil" element={<ProtectedRoute><Perfil /></ProtectedRoute>} />
