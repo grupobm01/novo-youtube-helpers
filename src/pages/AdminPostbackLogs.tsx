@@ -36,7 +36,7 @@ export default function AdminPostbackLogs() {
     (async () => {
       const user = await getAuthUser();
       if (!user) {
-        navigate("/inicio", { replace: true });
+        navigate("/login", { replace: true });
         return;
       }
       const ok = await isAdmin(user.id);

@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-
-const DEMO_EMAIL = "digital.jhf@gmail.com";
-const DEMO_PASSWORD = "123456";
 
 export default function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
@@ -10,25 +8,14 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session) {
-        setAuthenticated(true);
-        setLoading(false);
-      }
+      setAuthenticated(!!session);
+      setLoading(false);
     });
 
-    (async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        setAuthenticated(true);
-      } else {
-        const { error } = await supabase.auth.signInWithPassword({
-          email: DEMO_EMAIL,
-          password: DEMO_PASSWORD,
-        });
-        setAuthenticated(!error);
-      }
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setAuthenticated(!!session);
       setLoading(false);
-    })();
+    });
 
     return () => subscription.unsubscribe();
   }, []);
@@ -42,11 +29,7 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
   }
 
   if (!authenticated) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background px-6 text-center">
-        <p className="text-sm text-muted-foreground">Não foi possível iniciar a sessão. Recarregue a página.</p>
-      </div>
-    );
+    return <Navigate to="/login" replace />;
   }
 
   return <>{children}</>;
